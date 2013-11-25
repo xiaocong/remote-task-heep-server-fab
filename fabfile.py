@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from fabric.api import sudo, put, run, cd
-from fabric.contrib.files import append, exists
+from fabric.contrib.files import append, exists, comment
 
 
 def install():
@@ -22,6 +22,7 @@ LOG_PATH = "/var/log/monitor_daemon"
 
 def config(zk):
     def update_hosts(zk):
+        comment("/etc/hosts", r"^[0-9]+.[0-9]+.[0-9]+.[0-9]+\s+zookeeper_server", use_sudo=True)
         append("/etc/hosts", "%s\tzookeeper_server" % zk, use_sudo=True)
 
     def update_nginx():
