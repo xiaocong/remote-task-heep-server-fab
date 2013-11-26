@@ -17,7 +17,7 @@ if [ "$_IP" ]; then
     printf "My IP address is %s\n" "$_IP"
 fi
 
-sh -c "cd /home/pi/app && /usr/local/bin/gunicorn --access-logfile /var/log/monitor_daemon/gunicorn.access.log -u 1000 --pid /var/log/monitor_daemon/gunicorn.pid -c gunicorn.config.py app:app -D"
+sh -c "cd /home/pi/app && /usr/local/bin/gunicorn -u 1000 --pid /var/run/gunicorn.pid -c gunicorn.config.py app:app -D"
 sh -c "cd /home/pi/app && /usr/bin/python monitor_daemon.py start"
 
 exit 0
