@@ -72,4 +72,14 @@ def restart():
 
 def reboot():
     from fabric.api import reboot as rb
+    with cd("/home/pi/app"):
+        if exists("/var/run/gunicorn.pid"):
+            sudo("kill -9 `cat /var/run/gunicorn.pid`", pty=False)
+        if exists("/var/run/monitor_daemon.pid"):
+            sudo("python monitor_daemon.py stop")
+        sudo("service nginx stop")
+        sudo("service ajaxterm stop")
     rb()
+
+def shutdown():
+    sudo("poweroff")
