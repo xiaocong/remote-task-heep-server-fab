@@ -7,7 +7,7 @@ from fabric.contrib.files import append, exists, comment
 
 def install():
     sudo("apt-get update")
-    sudo("apt-get install python-dev python-pip python-opencv libevent-dev python-virtualenv nginx ajaxterm")
+    sudo("apt-get install python-dev python-pip python-opencv libevent-dev python-virtualenv nginx ajaxterm expect")
     sudo("service apache2 stop")
     sudo("update-rc.d apache2 disable")
     install_adb()
